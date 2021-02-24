@@ -1,6 +1,7 @@
 package lab1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public final class Statistics {
@@ -44,6 +45,42 @@ public final class Statistics {
                 numerator += (values.get(j) - mathExpect) * (values.get(j + i) - mathExpect);
             }
             result.add(numerator / denominator);
+        }
+        return result;
+    }
+
+    public static ArrayList<Double> calculateDistributionDensity(ArrayList<Double> values, int numPieces) {
+        Collections.sort(values);
+        int size = values.size();
+
+        ArrayList<Double> result = new ArrayList<>(numPieces);
+        for (int i = 0; i < numPieces; i++) {
+            result.add(0.0);
+        }
+
+        double step = (values.get(size - 1) - values.get(0)) / numPieces;
+
+        int k = 0;
+        for (int i = 0; i < numPieces; i++) {
+            for (int j = k; j < size; ++j) {
+                if (values.get(j) >= step * (i + 1)) {
+                    k = j;
+                    break;
+                }
+                result.set(i, result.get(i) + 1);
+            }
+            result.set(i, result.get(i) / size);
+        }
+
+        return result;
+    }
+
+    public static ArrayList<Double> calculateDistributionFunc(ArrayList<Double> distributionDensity) {
+        ArrayList<Double> result = new ArrayList<>(distributionDensity);
+        double sum = 0;
+        for (int i = 0; i < result.size(); i++) {
+            result.set(i, result.get(i) + sum);
+            sum = result.get(i);
         }
         return result;
     }

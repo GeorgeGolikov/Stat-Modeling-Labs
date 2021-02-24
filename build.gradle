@@ -1,6 +1,7 @@
 plugins {
     id 'groovy'
     id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 group 'ru.spbstu.stat-modeling'
@@ -10,14 +11,19 @@ repositories {
     mavenCentral()
 }
 
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
-    // https://mvnrepository.com/artifact/com.zenjava/javafx-maven-plugin
-    implementation group: 'com.zenjava', name: 'javafx-maven-plugin', version: '8.8.3'
+    // https://mvnrepository.com/artifact/org.openjfx/javafx
+    implementation group: 'org.openjfx', name: 'javafx', version: '11', ext: 'pom'
 }
 
 test {
