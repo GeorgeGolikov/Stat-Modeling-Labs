@@ -14,7 +14,7 @@ public class Tools {
         try {
             FileWriter writer = new FileWriter(file, false); // overwrites the file
             for (double d : list){
-                writer.write(d + "\n");
+                writer.write(String.valueOf(d).replace(".", ",") + "\n");
             }
             writer.close();
         }
