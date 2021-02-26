@@ -2,9 +2,7 @@ package lab1;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -34,31 +32,11 @@ public class Lab1 extends Application {
         ArrayList<Double> distributionFunc = Statistics.calculateDistributionFunc(distributionDensity);
 
         primaryStage.setTitle("Charts");
-        final NumberAxis xAxis = new NumberAxis();
-        final NumberAxis yAxis = new NumberAxis();
-        final LineChart<Number,Number> lineChartDens = new LineChart<>(xAxis,yAxis);
-//        final LineChart<Number,Number> lineChartFunc = new LineChart<>(xAxis,yAxis);
+        FlowPane root = new FlowPane();
+        root.getChildren().addAll(Tools.createLineChart("Distribution Density", distributionDensity),
+                                  Tools.createLineChart("Distribution Function", distributionFunc));
 
-        lineChartDens.setTitle("Distribution Density");
-        XYChart.Series seriesDens = new XYChart.Series();
-        seriesDens.setName("Distribution Density");
-
-//        lineChartFunc.setTitle("Distribution Function");
-//        XYChart.Series seriesFunc = new XYChart.Series();
-//        seriesFunc.setName("Distribution Function");
-
-        //populating the series with data
-        for (int i = 0; i < numPieces; ++i) {
-            seriesDens.getData().add(new XYChart.Data((i + 1) / 12.0, distributionDensity.get(i)));
-//            seriesFunc.getData().add(new XYChart.Data((i + 1) / 12.0, distributionFunc.get(i)));
-        }
-
-        Scene scene  = new Scene(lineChartDens, 800, 600);
-//        Scene scene  = new Scene(lineChartFunc, 800, 600);
-        lineChartDens.getData().add(seriesDens);
-//        lineChartFunc.getData().add(seriesFunc);
-
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(root, 1200, 900));
         primaryStage.show();
     }
 }
