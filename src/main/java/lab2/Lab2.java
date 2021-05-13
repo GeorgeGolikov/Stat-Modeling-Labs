@@ -90,6 +90,7 @@ public class Lab2 extends Application {
     private void action(MouseEvent mouseEvent) {
         String method = distributionsComboBox.getValue();
 
+//        final int numPieces = 25;
         final int numPieces = 12;
         double a = 0;
         double b = 0;
@@ -100,7 +101,8 @@ public class Lab2 extends Application {
         switch (method) {
             case "irnuni":
                 a = 1;
-                b = 100;
+//                b = 100;
+                b = 10000;
                 values = Distributions.getValues(n, a, b, Distributions::irnuni);
                 theoryMField.setText(String.format("%f", Distributions.uniM));
                 theoryDField.setText(String.format("%f", Distributions.uniD));
@@ -168,7 +170,9 @@ public class Lab2 extends Application {
         if (plotnRasprChart != null && funcRasprChart != null) {
             root.getChildren().removeAll(plotnRasprChart, funcRasprChart);
         }
+//        plotnRasprChart = Tools.createLineChart("Plotn raspr", distributionDensity, values);
         plotnRasprChart = Tools.createLineChart("Plotn raspr", distributionDensity);
+//        funcRasprChart = Tools.createLineChart("Func raspr", distributionFunc, values);
         funcRasprChart = Tools.createLineChart("Func raspr", distributionFunc);
 
         root.getChildren().addAll(plotnRasprChart, funcRasprChart);
