@@ -63,7 +63,7 @@ public final class Statistics {
         int k = 0;
         for (int i = 0; i < numPieces; i++) {
             for (int j = k; j < size; ++j) {
-                if (values.get(j) >= step * (i + 1)) {
+                if (values.get(j) >= values.get(0) + step * (i + 1)) {
                     k = j;
                     break;
                 }
